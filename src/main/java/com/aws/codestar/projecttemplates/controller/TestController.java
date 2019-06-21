@@ -1,17 +1,20 @@
 package com.aws.codestar.projecttemplates.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+public class TestController implements RequestHandler<Object, Object> {
 
-@RestController
-public class TestController{
-	
-	@RequestMapping(value = "/testService", method = RequestMethod.POST)
-	public String testService(HttpServletRequest request) {
-		
-		return "response : In testService"+request.toString();
+	@Override
+	public Object handleRequest(final Object input, final Context context) {
+		if(input==null) {
+			return "Response : null!";
+		}
+		return getResponse(input);
 	}
+	
+	public String getResponse(Object input) {
+		return "Response : "+input.toString();
+	}
+
 }
