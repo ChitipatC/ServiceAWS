@@ -1,7 +1,13 @@
 package com.aws.codestar.projecttemplates.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.aws.codestar.projecttemplates.GatewayResponse;
 
 public class TestController implements RequestHandler<Object, Object> {
 
@@ -16,7 +22,9 @@ public class TestController implements RequestHandler<Object, Object> {
 	public Object getResponse(Object input,Context context) {
     	context.getLogger().log("=====In handleRequest=====");
     	
-        return "=====RESPONES : "+input.toString()+"=====";
+    	 Map<String, String> headers = new HashMap<>();
+         headers.put("Content-Type", "application/json");
+         return new GatewayResponse(new JSONObject().put("response", input.toString()).toString(), headers, 200);
 	}
 
 }
