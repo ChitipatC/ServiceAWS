@@ -16,8 +16,10 @@ public class TestController implements RequestHandler<UserInfo, Object> {
 	public Object handleRequest(UserInfo input, Context context) {
 		 Map<String, String> headers = new HashMap<>();
          headers.put("Content-Type", "application/json");
-         context.getLogger().log(input.toString());
-         return new GatewayResponse(new JSONObject().put("response", input.toString()).toString(), headers, 200);
+         context.getLogger().log("======INPUT : "+input.toString()+"=====");
+         new GatewayResponse(new JSONObject().put("response", input).toString(), headers, 200);
+         input.setPassword("*********************");
+         return input.toString();
 	}
 
 }
