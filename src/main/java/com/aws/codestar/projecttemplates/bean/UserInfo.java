@@ -28,5 +28,9 @@ public class UserInfo implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	@Override
+	public String toString() {
+		return "UserInfo [userName=" + userName + ", password=" + password + ", email=" + email + "]";
+	}
+		
 }
